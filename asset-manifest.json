@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/DevTown_Assignment/static/css/main.c6a7ad1d.css",
+    "main.js": "/DevTown_Assignment/static/js/main.839605af.js",
+    "static/js/787.56163596.chunk.js": "/DevTown_Assignment/static/js/787.56163596.chunk.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/DevTown_Assignment/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/DevTown_Assignment/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/DevTown_Assignment/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/DevTown_Assignment/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/DevTown_Assignment/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/logo.svg": "/DevTown_Assignment/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/DevTown_Assignment/index.html",
+    "main.c6a7ad1d.css.map": "/DevTown_Assignment/static/css/main.c6a7ad1d.css.map",
+    "main.839605af.js.map": "/DevTown_Assignment/static/js/main.839605af.js.map",
+    "787.56163596.chunk.js.map": "/DevTown_Assignment/static/js/787.56163596.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c6a7ad1d.css",
+    "static/js/main.839605af.js"
+  ]
+}
