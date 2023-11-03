@@ -5,7 +5,7 @@ import { MultiSelect } from "react-multi-select-component";
 import 'react-dropdown/style.css';
 import "font-awesome/css/font-awesome.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
-const Data = () => {
+const Main = () => {
   const options = [
     { label: " category", value: "category" },
     { label: "age", value: "Age" },
@@ -13,12 +13,17 @@ const Data = () => {
   const [selected, setSelected] = useState([]);
   const [passedData, setPassedData] = useState(data);
   const [currentPage, setCurrentPage] = useState(1)
+  const [appear, setAppear] = useState(false)
+  const [appearDesc, setAppearDesc] = useState(false)
+  const [cat,setCat]=useState()
+  const [val,setVal]=useState()
   const recordsPerpage = 3
   const lastIndex = currentPage * recordsPerpage
   const firstIndex = lastIndex - recordsPerpage
   const records = passedData.slice(firstIndex, lastIndex)
-  const npage = Math.ceil(data.length / recordsPerpage)
+  const npage = Math.ceil(passedData.length / recordsPerpage)
   const numbers = [...Array(npage + 1).keys()].slice(1)
+  //sort the data in asc
   function sortData(co, type) {
     if (type == "text") {
       const newData = [...passedData].sort((a, b) => 
@@ -31,6 +36,15 @@ const Data = () => {
       setPassedData(newData)
    }
   }
+  //Filtering the data for number
+  function filterDat(e, col) {
+    setVal(e.target.value)
+    const d=data.filter((i) => {
+      return e.target.value===''?i:i[col].toString().includes(e.target.value)
+    })
+    setPassedData(d) 
+  }
+  //Sort the data in descending
   function sortDataDesc(co, type) {
     if (type == "text") {
       const newData = [...passedData].sort((a, b) => 
@@ -42,8 +56,15 @@ const Data = () => {
        a[co] < b[co]?1:-1)
       setPassedData(newData)
    }
- }
-  
+  }
+  //category Filtering for String
+  function filterDatCategory(e, col) {
+    setCat(e.target.value)
+    const d = data.filter((i) => {
+      return e.target.value==''?i:i[col].includes(e.target.value)
+    })
+    setPassedData(d)
+  }
   return (
     <>
      
@@ -69,7 +90,7 @@ const Data = () => {
                 <br/>
                 <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={()=>sortData('description',"text")}><i className="fa fa-sort-asc p-[8px]" aria-hidden="true" title="Ascending"/></button>
              <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={()=>sortDataDesc('description',"text")}><i className="fa fa-sort-desc p-[8px]" aria-hidden="true" title="Descending"/></button>
-
+                
               </th>
               <th scope="col" class="px-6 py-3" >
                 Age
@@ -78,14 +99,28 @@ const Data = () => {
                 <div className="flex">
                 <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={()=>sortData('age',"number")}>   <i className="fa fa-sort-asc p-[8px]" aria-hidden="true" title="Ascending"></i> </button>
             <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={()=>sortDataDesc('age',"number")}> <i className="fa fa-sort-desc p-[8px]" aria-hidden="true" title="Descending"></i></button>
-            </div>
+            <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={() => {
+                  setAppear(!appear)
+             }}><svg xmlns="http://www.w3.org/2000/svg" height="1.7em" viewBox="0 0 512 512"> <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg> </button>
+                  {appear && <div> 
+                  <input type="text" className="border border-s-violet-300 " value={val} onChange={(e)=>filterDat(e,"age")}/> 
+                </div>
+                }
+                </div>
               </th>
               <th scope="col" class="px-6 py-3 cursor-pointer" >
                 Category
                 <br />
                 <br/>
                 <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={()=>sortData('category',"text")}> <i className="fa fa-sort-asc p-[8px]" aria-hidden="true" title="Ascending"></i></button>
-             <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={()=>sortDataDesc('category',"text")}> <i className="fa fa-sort-desc p-[8px]" aria-hidden="true" title="Descending"></i></button>
+                <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={() => sortDataDesc('category', "text")}> <i className="fa fa-sort-desc p-[8px]" aria-hidden="true" title="Descending"></i></button>
+                <button className="p-0.4 border border-l-cyan-300 pd-[2px] m-[2px]" onClick={() => {
+                  setAppearDesc(!appearDesc)
+             }}><svg xmlns="http://www.w3.org/2000/svg" height="1.7em" viewBox="0 0 512 512"> <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg> </button>
+                  {appearDesc && <div> 
+                  <input type="text" className="border border-s-violet-300 " value={cat} onChange={(e)=>filterDatCategory(e,"category")}/> 
+                </div>
+                }
               </th>
             </tr>
           </thead>
@@ -145,25 +180,22 @@ const Data = () => {
       </div>
     </>
   );
-  
+  //For previous Page
  function prevPage() {
     if (currentPage != 1) {
        setCurrentPage(currentPage-1)
     }
   }
+  //For Current Page
   function changeCpage(id){
 setCurrentPage(id)
   }
+  //For nextPage
   function nextPage() {
     if (currentPage != npage) {
       setCurrentPage(currentPage+1)
    }
   }
-  
-  
-  
-   
- 
 };
 
-export default Data;
+export default Main;
