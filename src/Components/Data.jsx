@@ -6,10 +6,6 @@ import 'react-dropdown/style.css';
 import "font-awesome/css/font-awesome.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
 const Main = () => {
-  const options = [
-    { label: " category", value: "category" },
-    { label: "age", value: "Age" },
-  ];
   const [selected, setSelected] = useState([]);
   const [passedData, setPassedData] = useState(data);
   const [currentPage, setCurrentPage] = useState(1)
